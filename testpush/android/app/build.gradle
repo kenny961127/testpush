@@ -1,6 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -121,6 +123,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '"ZEXfuNsCV5mwZcm2g0w8EXCQjAafqqaZWkcV3"'
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -128,6 +131,9 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "string", "CodePushDeploymentKey", '"ZEXfuNsCV5mwZcm2g0w8EXCQjAafqqaZWkcV3"'
+            
+            matchingFallbacks = ["release"]
         }
     }
 
@@ -165,6 +171,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    implementation project(':appcenter-crashes')
+    implementation project(':appcenter-analytics')
+    implementation project(':appcenter')
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

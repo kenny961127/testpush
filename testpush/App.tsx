@@ -6,18 +6,11 @@
  */
 
 import React from 'react';
-import {
-  View,
-} from 'react-native';
-
-
+import { Dimensions, View } from 'react-native';
+import CodePush from 'react-native-code-push';
 
 function App(): JSX.Element {
-
-  return (
-    <View style={{flex:1, backgroundColor:'red'}}></View>
-  );
+  return <View style={{flex: 1, backgroundColor: 'red'}}></View>;
 }
 
-
-export default App;
+export default CodePush(App);
